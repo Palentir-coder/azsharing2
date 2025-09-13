@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const authModal = document.getElementById('auth-modal');
     if (!authModal) {
         console.error('CRITICAL ERROR: Auth modal element (#auth-modal) not found!');
-        return; // Stop script execution if modal is missing
+        // return; // Do not stop script execution, as other pages might not need the modal
     }
-    const closeButton = authModal.querySelector('.close-button'); // Now safe to call
+    const closeButton = authModal ? authModal.querySelector('.close-button') : null;
     const authButton = document.getElementById('auth-button');
     const logoutButton = document.getElementById('logout-button');
 
@@ -37,11 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const dashboardSection = document.getElementById('dashboard-section');
     const usernameDisplay = document.getElementById('username-display');
     const heroSection = document.querySelector('.hero-section');
-    const featuresSection = document.getElementById('features');
     const testimonialsSection = document.getElementById('testimonials');
     const ctaSection = document.querySelector('.cta-section');
 
-    // File listing elements
+    // File listing elements (only present on dashboard)
     const fileListContainer = document.querySelector('.file-list-container');
     const fileListEmptyState = document.getElementById('file-list-empty');
     const fileListLoadingState = document.getElementById('file-list-loading');
@@ -51,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const retryFilesButton = document.getElementById('retry-files-button');
     const uploadFirstFileButton = document.getElementById('upload-first-file-button'); // New
 
-    // File upload elements
+    // File upload elements (only present on dashboard)
     const uploadFileButton = document.getElementById('upload-file-button');
     const fileUploadInput = document.getElementById('file-upload-input');
     const uploadMessage = document.getElementById('upload-message');
@@ -71,9 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!authButton) {
         console.error('CRITICAL ERROR: Auth button element (#auth-button) not found!');
-        return; // Stop script execution if button is missing
+        // return; // Do not stop script execution, as other pages might not need this button
     }
-    if (!closeButton) {
+    if (!closeButton && authModal) { // Only warn if modal exists but close button doesn't
         console.warn('WARNING: Close button element (.close-button inside #auth-modal) not found!');
         // We can still proceed, but closing the modal might be an issue.
     }
@@ -147,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- File Listing Functions ---
+    // --- File Listing Functions (only relevant for dashboard) ---
     function formatBytes(bytes, decimals = 2) {
         if (bytes === 0) return '0 Bytes';
         const k = 1024;
@@ -158,23 +157,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showFileState(state) {
-        fileListEmptyState.classList.add('hidden');
-        fileListLoadingState.classList.add('hidden');
-        fileListErrorState.classList.add('hidden');
-        filesTableWrapper.classList.add('hidden');
+        if (fileListEmptyState) fileListEmptyState.classList.add('hidden');
+        if (fileListLoadingState) fileListLoadingState.classList.add('hidden');
+        if (fileListErrorState) fileListErrorState.classList.add('hidden');
+        if (filesTableWrapper) filesTableWrapper.classList.add('hidden');
 
-        if (state === 'empty') {
+        if (state === 'empty' && fileListEmptyState) {
             fileListEmptyState.classList.remove('hidden');
-        } else if (state === 'loading') {
+        } else if (state === 'loading' && fileListLoadingState) {
             fileListLoadingState.classList.remove('hidden');
-        } else if (state === 'error') {
+        } else if (state === 'error' && fileListErrorState) {
             fileListErrorState.classList.remove('hidden');
-        } else if (state === 'data') {
+        } else if (state === 'data' && filesTableWrapper) {
             filesTableWrapper.classList.remove('hidden');
         }
     }
 
     async function fetchUserFiles() {
+        if (!dashboardSection) { // Only fetch files if on the dashboard page
+            console.log('Not on dashboard page, skipping file fetch.');
+            return;
+        }
         console.log('Fetching user files...');
         showFileState('loading');
         const { data: { user } } = await supabase.auth.getUser();
@@ -257,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (logoutButton) logoutButton.classList.remove('hidden');
             if (dashboardSection) dashboardSection.classList.remove('hidden');
             if (heroSection) heroSection.classList.add('hidden'); // Hide hero section
-            if (featuresSection) featuresSection.classList.add('hidden'); // Hide features
+            // featuresSection is now a separate page, no need to hide/show it here
             if (testimonialsSection) testimonialsSection.classList.add('hidden'); // Hide testimonials
             if (ctaSection) ctaSection.classList.add('hidden'); // Hide CTA
 
@@ -276,22 +279,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             hideAuthModal();
-            fetchUserFiles(); // Fetch files when user logs in
+            fetchUserFiles(); // Fetch files when user logs in (only if on dashboard)
         } else {
             // User is logged out
             if (authButton) authButton.classList.remove('hidden');
             if (logoutButton) logoutButton.classList.add('hidden');
             if (dashboardSection) dashboardSection.classList.add('hidden');
             if (heroSection) heroSection.classList.remove('hidden'); // Show hero section
-            if (featuresSection) featuresSection.classList.remove('hidden'); // Show features
+            // featuresSection is now a separate page, no need to hide/show it here
             if (testimonialsSection) testimonialsSection.classList.remove('hidden'); // Show testimonials
             if (ctaSection) ctaSection.classList.remove('hidden'); // Show CTA
             console.log('UI updated for logged out state.');
         }
     }
 
-    // --- File Upload Logic ---
+    // --- File Upload Logic (only relevant for dashboard) ---
     async function uploadFile(file) {
+        if (!uploadMessage) return; // Ensure upload message element exists
+
         clearMessages();
         showMessage(uploadMessage, `Téléversement de "${file.name}"...`, false);
 
@@ -352,8 +357,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- File Actions (Download, Share, Delete) ---
+    // --- File Actions (Download, Share, Delete) (only relevant for dashboard) ---
     async function downloadFile(filePath, fileName) {
+        if (!uploadMessage) return; // Ensure upload message element exists
+
         console.log('Attempting to download file:', filePath);
         clearMessages(); // Clear previous messages
         showMessage(uploadMessage, `Préparation du téléchargement de "${fileName}"...`, false);
@@ -382,7 +389,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const a = document.createElement('a');
             a.href = url;
             a.download = fileName; // Use original file name
-            // a.style.display = 'none'; // Removed to improve browser compatibility for programmatic downloads
             document.body.appendChild(a);
             a.click();
             // Clean up after a short delay to ensure the browser has time to initiate the download
@@ -401,6 +407,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function deleteFile(fileId, storagePath) {
+        if (!uploadMessage) return; // Ensure upload message element exists
+
         if (!confirm('Êtes-vous sûr de vouloir supprimer ce fichier ? Cette action est irréversible.')) {
             return;
         }
@@ -442,6 +450,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function attachFileActionListeners() {
+        // Only attach if filesTableBody exists (i.e., on dashboard)
+        if (!filesTableBody) return;
+
         // Download buttons
         document.querySelectorAll('.download-file-btn').forEach(button => {
             button.onclick = null; // Remove previous listeners to prevent duplicates
@@ -474,19 +485,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- Event Listeners ---
-    authButton.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default behavior if any
-        console.log('Auth button clicked!');
-        showAuthModal();
-    });
+    if (authButton) {
+        authButton.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default behavior if any
+            console.log('Auth button clicked!');
+            showAuthModal();
+        });
+    }
+
 
     if (closeButton) { // Only attach if closeButton exists
         closeButton.addEventListener('click', () => {
             console.log('Close button clicked!');
             hideAuthModal();
         });
-    } else {
-        console.warn('Close button not found, cannot attach click listener.');
+    } else if (authModal) { // If modal exists but close button doesn't, allow clicking outside
+        console.warn('Close button not found, modal can only be closed by clicking outside.');
     }
 
     if (loginTab) loginTab.addEventListener('click', showLoginForm);
@@ -587,26 +601,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Retry files button
+    // Retry files button (only relevant for dashboard)
     if (retryFilesButton) {
         retryFilesButton.addEventListener('click', fetchUserFiles);
     }
 
-    // Upload file button click handler
+    // Upload file button click handler (only relevant for dashboard)
     if (uploadFileButton) {
         uploadFileButton.addEventListener('click', () => {
             fileUploadInput.click(); // Trigger the hidden file input
         });
     }
 
-    // Upload first file button in empty state
+    // Upload first file button in empty state (only relevant for dashboard)
     if (uploadFirstFileButton) {
         uploadFirstFileButton.addEventListener('click', () => {
             fileUploadInput.click(); // Trigger the hidden file input
         });
     }
 
-    // Handle file selection
+    // Handle file selection (only relevant for dashboard)
     if (fileUploadInput) {
         fileUploadInput.addEventListener('change', async (event) => {
             const files = event.target.files;
@@ -659,9 +673,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            } else {
+                // If target is not on the current page, navigate to index.html and then scroll
+                window.location.href = `/${targetId}`;
+            }
         });
     });
 });
