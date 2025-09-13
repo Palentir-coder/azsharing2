@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const closeButton = authModal ? authModal.querySelector('.close-button') : null;
     const authButton = document.getElementById('auth-button');
-    const logoutButton = document.getElementById('logout-button');
+    const logoutButton = document.getElementById('logout-button'); // Main navbar logout button
 
     const loginTab = document.getElementById('login-tab');
     const signupTab = document.getElementById('signup-tab');
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSection = document.querySelector('.hero-section');
     const testimonialsSection = document.getElementById('testimonials');
     const ctaSection = document.querySelector('.cta-section');
+    const dashboardLogoutButton = document.getElementById('dashboard-logout-button'); // New dashboard logout button
 
     // File listing elements (only present on dashboard)
     const fileListContainer = document.querySelector('.file-list-container');
@@ -59,7 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Auth Modal Element:', authModal);
     console.log('Close Button Element:', closeButton);
     console.log('Auth Button Element:', authButton);
-    console.log('Logout Button Element:', logoutButton);
+    console.log('Logout Button Element (main navbar):', logoutButton);
+    console.log('Dashboard Logout Button Element:', dashboardLogoutButton);
     console.log('Login Message Element:', loginMessage);
     console.log('Signup Message Element:', signupMessage);
     console.log('File List Container:', fileListContainer);
@@ -256,13 +258,13 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('updateUIForAuth called with session:', session);
         if (session) {
             // User is logged in
-            if (authButton) authButton.classList.add('hidden');
-            if (logoutButton) logoutButton.classList.remove('hidden');
+            if (authButton) authButton.classList.add('hidden'); // Hide main navbar auth button
+            // main navbar logout button is implicitly hidden because heroSection is hidden
             if (dashboardSection) dashboardSection.classList.remove('hidden');
             if (heroSection) heroSection.classList.add('hidden'); // Hide hero section
-            // featuresSection is now a separate page, no need to hide/show it here
             if (testimonialsSection) testimonialsSection.classList.add('hidden'); // Hide testimonials
             if (ctaSection) ctaSection.classList.add('hidden'); // Hide CTA
+            if (dashboardLogoutButton) dashboardLogoutButton.classList.remove('hidden'); // Show dashboard logout button
 
             const { data: profile, error } = await supabase
                 .from('profiles')
@@ -282,13 +284,13 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchUserFiles(); // Fetch files when user logs in (only if on dashboard)
         } else {
             // User is logged out
-            if (authButton) authButton.classList.remove('hidden');
-            if (logoutButton) logoutButton.classList.add('hidden');
+            if (authButton) authButton.classList.remove('hidden'); // Show main navbar auth button
+            // main navbar logout button is implicitly hidden because heroSection is visible
             if (dashboardSection) dashboardSection.classList.add('hidden');
             if (heroSection) heroSection.classList.remove('hidden'); // Show hero section
-            // featuresSection is now a separate page, no need to hide/show it here
             if (testimonialsSection) testimonialsSection.classList.remove('hidden'); // Show testimonials
             if (ctaSection) ctaSection.classList.remove('hidden'); // Show CTA
+            if (dashboardLogoutButton) dashboardLogoutButton.classList.add('hidden'); // Hide dashboard logout button
             console.log('UI updated for logged out state.');
         }
     }
@@ -587,15 +589,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Logout Button
+    // Logout Button (main navbar)
     if (logoutButton) {
         logoutButton.addEventListener('click', async () => {
-            console.log('Logout button clicked.');
+            console.log('Main Navbar Logout button clicked.');
             const { error } = await supabase.auth.signOut();
             if (error) {
                 console.error('Error during logout:', error.message, error);
             } else {
-                console.log('User logged out successfully.');
+                console.log('User logged out successfully from main navbar.');
+                updateUIForAuth(null); // Update UI to logged out state
+            }
+        });
+    }
+
+    // Logout Button (dashboard)
+    if (dashboardLogoutButton) {
+        dashboardLogoutButton.addEventListener('click', async () => {
+            console.log('Dashboard Logout button clicked.');
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                console.error('Error during logout:', error.message, error);
+            } else {
+                console.log('User logged out successfully from dashboard.');
                 updateUIForAuth(null); // Update UI to logged out state
             }
         });

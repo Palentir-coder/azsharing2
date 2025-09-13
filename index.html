@@ -14,10 +14,12 @@
     <header class="hero-section">
         <nav class="navbar">
             <div class="container">
-                <a href="#" class="logo">AzSharing</a>
+                <a href="/" class="logo">AzSharing</a>
                 <ul class="nav-links">
                     <li><a href="/features.html">Fonctionnalités</a></li>
                     <li><a href="/security.html">Sécurité</a></li>
+                    <li><a href="/tarifs.html">Tarifs</a></li>
+                    <li><a href="/about.html">À propos</a></li>
                     <li><a href="#testimonials">Témoignages</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -45,7 +47,10 @@
     <main>
         <section id="dashboard-section" class="dashboard-section hidden">
             <div class="container">
-                <h2 class="section-title">Bienvenue sur votre Tableau de Bord, <span id="username-display"></span>!</h2>
+                <div class="dashboard-header-top">
+                    <h2 class="dashboard-welcome-title">Bienvenue, <span id="username-display"></span>!</h2>
+                    <button id="dashboard-logout-button" class="btn btn-secondary">Déconnexion</button>
+                </div>
                 <p class="section-subtitle">Gérez vos fichiers et partagez-les en toute simplicité.</p>
 
                 <nav class="dashboard-nav">
@@ -168,7 +173,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="#" class="logo">AzSharing</a>
+                    <a href="/" class="logo">AzSharing</a>
                     <p>Partagez vos fichiers en toute confiance.</p>
                 </div>
                 <div class="footer-col">
@@ -176,23 +181,21 @@
                     <ul>
                         <li><a href="/features.html">Fonctionnalités</a></li>
                         <li><a href="/security.html">Sécurité</a></li>
-                        <li><a href="#">Tarifs</a></li>
+                        <li><a href="/tarifs.html">Tarifs</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Entreprise</h4>
+                    <h4>Communauté</h4>
                     <ul>
-                        <li><a href="#">À propos</a></li>
-                        <li><a href="#">Carrières</a></li>
+                        <li><a href="/about.html">À propos</a></li>
                         <li><a href="#">Blog</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Support</h4>
                     <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Aide</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="/faq.html">FAQ</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
                     </ul>
                 </div>
             </div>

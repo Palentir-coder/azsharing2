@@ -758,6 +758,33 @@ p {
     text-align: center;
 }
 
+/* New styles for dashboard header top */
+.dashboard-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl); /* Space between header and subtitle */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: var(--spacing-md); /* Gap between title and button */
+    text-align: left; /* Ensure text aligns left within its container */
+}
+
+.dashboard-welcome-title {
+    font-size: var(--font-size-h2); /* Keep it prominent */
+    color: var(--color-text);
+    flex-grow: 1; /* Allow it to take available space */
+    text-align: left; /* Explicitly align left */
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#dashboard-logout-button {
+    padding: var(--spacing-sm) var(--spacing-lg); /* Slightly smaller button */
+    font-size: 0.9rem;
+}
+
+
 .dashboard-nav {
     margin-top: var(--spacing-xxxl);
     margin-bottom: var(--spacing-xxxl);
@@ -954,6 +981,56 @@ p {
     justify-content: flex-end; /* Align actions to the right */
 }
 
+/* Contact Form Specific Styles */
+.contact-form-container {
+    background-color: var(--color-surface);
+    padding: var(--spacing-xxxl);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 700px;
+    margin: var(--spacing-xxxxl) auto 0 auto; /* Top margin and center */
+    text-align: left;
+}
+
+.contact-form .form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(158, 127, 255, 0.2);
+}
+
+.contact-form textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 120px;
+}
+
+
 /* Utility Classes */
 .hidden {
     display: none !important;
@@ -1047,6 +1124,20 @@ p {
     }
     .dashboard-nav-link {
         justify-content: flex-start;
+    }
+
+    .dashboard-header-top {
+        flex-direction: column;
+        align-items: flex-start; /* Align items to start on small screens */
+        text-align: left;
+    }
+    .dashboard-welcome-title {
+        font-size: var(--font-size-h3);
+        margin-bottom: var(--spacing-md);
+    }
+    #dashboard-logout-button {
+        width: auto; /* Allow button to size naturally */
+        align-self: flex-start; /* Align button to start */
     }
 }
 
