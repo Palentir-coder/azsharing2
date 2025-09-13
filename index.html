@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
-    <header class="hero-section">
+    <header id="main-header">
         <nav class="navbar">
             <div class="container">
                 <a href="/" class="logo">AzSharing</a>
@@ -20,8 +20,9 @@
                     <li><a href="/security.html">Sécurité</a></li>
                     <li><a href="/tarifs.html">Tarifs</a></li>
                     <li><a href="/about.html">À propos</a></li>
-                    <li><a href="#testimonials">Témoignages</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="/faq.html">FAQ</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li id="profile-nav-link" class="hidden"><a href="/profile.html">Mon Profil</a></li>
                 </ul>
                 <div class="nav-actions">
                     <button id="auth-button" class="btn btn-primary">Mon Compte</button>
@@ -29,7 +30,9 @@
                 </div>
             </div>
         </nav>
+    </header>
 
+    <header class="hero-section">
         <div class="hero-content container">
             <h1>Partagez, Collaborez, Sécurisez.</h1>
             <p class="subtitle">La plateforme intuitive pour un échange de fichiers fluide entre amis et collègues.</p>
@@ -49,7 +52,6 @@
             <div class="container">
                 <div class="dashboard-header-top">
                     <h2 class="dashboard-welcome-title">Bienvenue, <span id="username-display"></span>!</h2>
-                    <button id="dashboard-logout-button" class="btn btn-secondary">Déconnexion</button>
                 </div>
                 <p class="section-subtitle">Gérez vos fichiers et partagez-les en toute simplicité.</p>
 
@@ -78,16 +80,28 @@
 
                 <div class="dashboard-content">
                     <div class="dashboard-actions">
-                        <button id="upload-file-button" class="btn btn-primary btn-lg">Uploader un fichier</button>
+                        <button id="create-folder-button" class="btn btn-secondary btn-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-plus"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16Z"/><line x1="12" x2="12" y1="10" y2="16"/><line x1="9" x2="15" y1="13" y2="13"/></svg>
+                            Créer un dossier
+                        </button>
+                        <button id="upload-file-button" class="btn btn-primary btn-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                            Uploader un fichier
+                        </button>
                         <input type="file" id="file-upload-input" class="hidden" multiple>
                     </div>
                     <p id="upload-message" class="auth-message"></p>
 
                     <div class="file-list-container">
-                        <h3 class="file-list-title">Mes Fichiers</h3>
+                        <div class="file-list-header">
+                            <h3 class="file-list-title">Mes Fichiers</h3>
+                            <div id="breadcrumbs" class="breadcrumbs">
+                                <!-- Breadcrumbs will be inserted here by JavaScript -->
+                            </div>
+                        </div>
                         <div id="file-list-empty" class="empty-state">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open"><path d="M6 14H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2.5L7 4.5 8.5 3H18a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2"/><path d="M10 10l-2 2l2 2"/><path d="M14 10l2 2l-2 2"/></svg>
-                            <p>Aucun fichier téléversé pour le moment.</p>
+                            <p>Aucun fichier ou dossier téléversé pour le moment.</p>
                             <button class="btn btn-outline" id="upload-first-file-button">Uploader votre premier fichier</button>
                         </div>
                         <div id="file-list-loading" class="loading-state hidden">
@@ -103,15 +117,15 @@
                             <table class="files-table">
                                 <thead>
                                     <tr>
-                                        <th>Nom du fichier</th>
+                                        <th>Nom</th>
                                         <th>Taille</th>
                                         <th>Type</th>
-                                        <th>Date d'upload</th>
+                                        <th>Date de modification</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody id="files-table-body">
-                                    <!-- File rows will be inserted here by JavaScript -->
+                                    <!-- File and folder rows will be inserted here by JavaScript -->
                                 </tbody>
                             </table>
                         </div>
@@ -250,6 +264,22 @@
                     <p id="signup-message" class="auth-message"></p>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <!-- Create Folder Modal -->
+    <div id="create-folder-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <h3>Créer un nouveau dossier</h3>
+            <form id="create-folder-form" class="form">
+                <div class="form-group">
+                    <label for="folder-name">Nom du dossier</label>
+                    <input type="text" id="folder-name" placeholder="Nouveau dossier" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Créer</button>
+                <p id="create-folder-message" class="message"></p>
+            </form>
         </div>
     </div>
 

@@ -1,0 +1,50 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Redirections explicites pour les pages HTML
+# Cela garantit que Netlify sert le fichier HTML correspondant
+# lorsque l'URL exacte est demandée.
+[[redirects]]
+  from = "/features.html"
+  to = "/features.html"
+  status = 200
+
+[[redirects]]
+  from = "/security.html"
+  to = "/security.html"
+  status = 200
+
+[[redirects]]
+  from = "/tarifs.html"
+  to = "/tarifs.html"
+  status = 200
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/faq.html"
+  to = "/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/profile.html"
+  to = "/profile.html"
+  status = 200
+
+# Règle de secours : redirige toutes les autres requêtes vers index.html
+# Cela permet d'éviter les erreurs 404 pour les chemins non définis
+# et de gérer les URL "propres" (ex: /features au lieu de /features.html)
+# en les faisant atterrir sur la page d'accueil.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

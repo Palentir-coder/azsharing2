@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AzSharing - Tarifs</title>
+    <title>Tarifs - AzSharing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
-    <header class="hero-section hero-small">
+    <header id="main-header">
         <nav class="navbar">
             <div class="container">
                 <a href="/" class="logo">AzSharing</a>
@@ -20,8 +20,9 @@
                     <li><a href="/security.html">Sécurité</a></li>
                     <li><a href="/tarifs.html">Tarifs</a></li>
                     <li><a href="/about.html">À propos</a></li>
-                    <li><a href="/#testimonials">Témoignages</a></li>
+                    <li><a href="/faq.html">FAQ</a></li>
                     <li><a href="/contact.html">Contact</a></li>
+                    <li id="profile-nav-link" class="hidden"><a href="/profile.html">Mon Profil</a></li>
                 </ul>
                 <div class="nav-actions">
                     <button id="auth-button" class="btn btn-primary">Mon Compte</button>
@@ -29,49 +30,63 @@
                 </div>
             </div>
         </nav>
+    </header>
 
+    <header class="hero-section hero-small">
         <div class="hero-content container">
-            <h1>Nos Tarifs : Simplicité et Transparence.</h1>
-            <p class="subtitle">AzSharing est fier d'être un service entièrement gratuit et open source, conçu pour tous.</p>
+            <h1>Une offre simple et transparente.</h1>
+            <p class="subtitle">AzSharing est fier d'être un service entièrement gratuit et open source.</p>
         </div>
     </header>
 
     <main>
-        <section id="pricing" class="features-section">
+        <section class="features-section">
             <div class="container">
-                <h2 class="section-title">Un Engagement envers la Liberté et la Communauté</h2>
-                <p class="section-subtitle">Nous croyons que le partage sécurisé de fichiers devrait être accessible à tous, sans barrières financières.</p>
+                <h2 class="section-title">Notre engagement : 100% gratuit, 100% open source</h2>
+                <p class="section-subtitle">Accédez à toutes nos fonctionnalités sans frais ni abonnement caché.</p>
 
                 <div class="features-grid">
                     <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dollar-sign-off"><path d="M12 2v2"/><path d="M12 22v-2"/><path d="M17 5H9.5a3.5 3.5 0 0 0-3.338 4.39M14 12H8a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h3.5"/><path d="M2 2l20 20"/></svg></div>
-                        <h3>Coût Zéro</h3>
-                        <p>Accédez à toutes les fonctionnalités de partage et de stockage sans aucun frais caché. Pas d'abonnements, pas de limites de fonctionnalités.</p>
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gift"><polyline points="20 12 12 12 12 2"/><path d="M20 7h-5a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h5A2 2 0 0 1 22 3v2a2 2 0 0 1-2 2Z"/><path d="M2 7h5a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2A2 2 0 0 0 0 3v2a2 2 0 0 0 2 2Z"/><path d="M7 21h10"/><path d="M12 7v14"/></svg>
+                        </div>
+                        <h3>Accès Gratuit Illimité</h3>
+                        <p>Profitez de toutes les fonctionnalités d'AzSharing sans aucun coût. Pas d'abonnement, pas de frais cachés.</p>
                     </div>
                     <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
-                        <h3>Transparence Totale</h3>
-                        <p>Notre code est entièrement open source. Chacun peut l'examiner, le modifier et contribuer à son amélioration, garantissant une confiance maximale.</p>
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </div>
+                        <h3>Open Source</h3>
+                        <p>Notre code est entièrement open source. Transparence totale et possibilité pour la communauté de contribuer.</p>
                     </div>
                     <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-                        <h3>Communauté Active</h3>
-                        <p>Bénéficiez du soutien d'une communauté grandissante de développeurs et d'utilisateurs. Ensemble, nous construisons une meilleure plateforme.</p>
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3>Soutenu par la Communauté</h3>
+                        <p>AzSharing est un projet communautaire, développé et maintenu par des passionnés pour le bien de tous.</p>
                     </div>
                     <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-infinity"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/></svg></div>
-                        <h3>Évolutivité Illimitée</h3>
-                        <p>Conçu pour s'adapter à vos besoins, AzSharing évolue avec vous, sans contraintes de plans payants.</p>
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-piggy-bank"><path d="M19 5c-1.5 0-2.8.8-3.5 2-1.5-1.2-2.8-2-3.5-2C9.8 5 8.5 5.8 7.8 7 6.5 5.8 5.2 5 3.5 5A2.5 2.5 0 0 0 1 7.5v9c0 1.3.8 2.5 2 3l.7.7c.3.3.6.4 1 .4H10c1.5 0 2.8-.8 3.5-2 1.5 1.2 2.8 2 3.5 2h6.5c.4 0 .7-.1 1-.4l.7-.7c1.2-.5 2-1.7 2-3V7.5A2.5 2.5 0 0 0 19 5Z"/><path d="M2 10h20"/><path d="M10 16V7"/><path d="M12 12h.01"/></svg>
+                        </div>
+                        <h3>Pas de Publicité</h3>
+                        <p>Profitez d'une expérience utilisateur sans interruption. AzSharing est entièrement exempt de publicités.</p>
                     </div>
                     <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.78 1.35a2 2 0 0 0 .73 2.73l.15.08a2 2 0 0 1 1 1.73v.56a2 2 0 0 1-1 1.73l-.15.08a2 2 0 0 0-.73 2.73l.78 1.35a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 1-1.73v.18a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.78-1.35a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.73v-.56a2 2 0 0 1 1-1.73l-.15-.08a2 2 0 0 0 .73-2.73l-.78-1.35a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
-                        <h3>Contrôle Total</h3>
-                        <p>Avec l'open source, vous avez le contrôle. Hébergez-le vous-même, personnalisez-le, ou utilisez notre service gratuit.</p>
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scale"><path d="m16 16 3-3a1 1 0 0 1 1.4 0l2.6 2.6a1 1 0 0 1 0 1.4l-3 3a1 1 0 0 1-1.4 0l-2.6-2.6a1 1 0 0 1 0-1.4Z"/><path d="m2 16 3-3a1 1 0 0 1 1.4 0l2.6 2.6a1 1 0 0 1 0 1.4l-3 3a1 1 0 0 1-1.4 0l-2.6-2.6a1 1 0 0 1 0-1.4Z"/><path d="M7 21V10a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v11"/><path d="M12 9V2"/></svg>
+                        </div>
+                        <h3>Équitable et Accessible</h3>
+                        <p>Nous croyons que le partage de fichiers sécurisé devrait être accessible à tous, sans barrières financières.</p>
                     </div>
                     <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg></div>
-                        <h3>Sécurité par la Communauté</h3>
-                        <p>La nature open source permet une revue constante du code par des experts, renforçant la sécurité et la robustesse.</p>
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.04 3 5.5l7 7Z"/></svg>
+                        </div>
+                        <h3>Développé avec Passion</h3>
+                        <p>AzSharing est le fruit d'un travail passionné, dédié à offrir la meilleure expérience de partage possible.</p>
                     </div>
                 </div>
             </div>
@@ -79,9 +94,9 @@
 
         <section class="cta-section">
             <div class="container">
-                <h2 class="section-title">Prêt à transformer votre façon de partager ?</h2>
-                <p class="section-subtitle">Rejoignez des milliers d'utilisateurs satisfaits dès aujourd'hui.</p>
-                <a href="/#auth-modal" class="btn btn-primary btn-lg">Commencer Gratuitement</a>
+                <h2 class="section-title">Rejoignez le mouvement du partage libre.</h2>
+                <p class="section-subtitle">Commencez à partager vos fichiers gratuitement dès aujourd'hui.</p>
+                <button class="btn btn-primary btn-lg">Commencer Gratuitement</button>
             </div>
         </section>
     </main>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sécurité - AzSharing</title>
+    <title>Mon Profil - AzSharing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -34,69 +34,69 @@
 
     <header class="hero-section hero-small">
         <div class="hero-content container">
-            <h1>Votre sécurité, notre priorité absolue.</h1>
-            <p class="subtitle">Chez AzSharing, nous mettons tout en œuvre pour protéger vos données.</p>
+            <h1>Mon Profil.</h1>
+            <p class="subtitle">Gérez vos informations personnelles et les paramètres de votre compte.</p>
         </div>
     </header>
 
     <main>
-        <section class="features-section">
+        <section class="profile-section">
             <div class="container">
-                <h2 class="section-title">Comment nous protégeons vos fichiers</h2>
-                <p class="section-subtitle">Des mesures de sécurité robustes pour une tranquillité d'esprit totale.</p>
-
-                <div class="features-grid">
-                    <div class="feature-card reveal">
-                        <div class="icon-wrapper">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                <div class="profile-card reveal">
+                    <h2 class="profile-title">Informations du Profil</h2>
+                    <form id="profile-form" class="profile-form">
+                        <div class="form-group">
+                            <label for="profile-username">Nom d'utilisateur</label>
+                            <input type="text" id="profile-username" placeholder="Votre nom d'utilisateur" required>
                         </div>
-                        <h3>Chiffrement de Bout en Bout</h3>
-                        <p>Vos fichiers sont chiffrés avant même de quitter votre appareil et restent chiffrés pendant le transfert et le stockage.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="icon-wrapper">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fingerprint"><path d="M12 10a2 2 0 0 0-2 2c0 1.02.193 1.829.554 2.5"/><path d="M17.883 16.68A5 5 0 0 0 18 12c0-1.4-.206-2.735-.607-3.984"/><path d="M14 11.5V9a2 2 0 0 0-2-2c-1.93 0-3.5 1.57-3.5 3.5v1.5"/><path d="M14.883 16.68a5 5 0 0 1-8.766 0"/><path d="M6.117 16.68A5 5 0 0 1 6 12c0-1.4.206-2.735.607-3.984"/><path d="M18.5 12.5c.2-.8.3-1.6.3-2.5 0-2.88-2.12-5.72-4.66-7.78"/><path d="M12 17.5c-1.2-.4-2.3-1-3.3-1.8"/><path d="M2 12C2 9.82 2.5 7.78 3.32 6"/><path d="M20.7 14c.4-.8.7-1.6.9-2.5 0-2.88-2.12-5.72-4.66-7.78"/><path d="M12 22c-1.2-.4-2.3-1-3.3-1.8"/><path d="M22 12c0-2.18-.5-4.22-1.32-6"/><path d="M12 2c-1.2.4-2.3 1-3.3 1.8"/><path d="M2 10c.4-.8.7-1.6.9-2.5C3.02 4.62 5.12 1.78 7.66.22"/></svg>
+                        <div class="form-group">
+                            <label for="profile-current-email">Email (non modifiable ici)</label>
+                            <input type="email" id="profile-current-email" disabled>
                         </div>
-                        <h3>Authentification Robuste</h3>
-                        <p>Accès sécurisé à votre compte avec des méthodes d'authentification modernes et une protection contre les accès non autorisés.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="icon-wrapper">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-server-cog"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M7 6h.01"/><path d="M7 18h.01"/><circle cx="17" cy="17" r="3"/><path d="M17 14v1.5"/><path d="M17 18.5V21"/><path d="M19.25 17h1.5"/><path d="M14.25 17h1.5"/></svg>
+                        <div class="form-group">
+                            <label for="profile-address">Adresse</label>
+                            <textarea id="profile-address" placeholder="Votre adresse complète"></textarea>
                         </div>
-                        <h3>Infrastructure Sécurisée</h3>
-                        <p>Nos serveurs sont hébergés dans des centres de données de pointe, avec des protections physiques et logicielles.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="icon-wrapper">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><path d="m2 2 20 20"/></svg>
-                        </div>
-                        <h3>Confidentialité des Données</h3>
-                        <p>Nous respectons votre vie privée. Vos fichiers ne sont jamais scannés, analysés ou partagés avec des tiers.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="icon-wrapper">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v6h4"/></svg>
-                        </div>
-                        <h3>Historique des Activités</h3>
-                        <p>Gardez une trace de toutes les actions effectuées sur vos fichiers : uploads, téléchargements, partages et suppressions.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="icon-wrapper">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bug"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9.17 16.17 8 22"/><path d="M14.83 16.17 16 22"/><path d="M17.92 11.62H22"/><path d="M2 11.62h4.08"/><path d="M12 2v20"/><path d="M12 18a4 4 0 0 0 2-3.46V14a4 4 0 0 0-4 0v.54A4 4 0 0 0 12 18z"/><path d="M12 7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-                        </div>
-                        <h3>Audits de Sécurité Réguliers</h3>
-                        <p>Nous effectuons des audits de sécurité fréquents pour identifier et corriger les vulnérabilités potentielles.</p>
-                    </div>
+                        <button type="submit" class="btn btn-primary btn-full">Enregistrer les modifications</button>
+                        <p id="profile-message" class="auth-message"></p>
+                    </form>
                 </div>
-            </div>
-        </section>
 
-        <section class="cta-section">
-            <div class="container">
-                <h2 class="section-title">Protégez vos données dès aujourd'hui.</h2>
-                <p class="section-subtitle">Rejoignez AzSharing et partagez en toute confiance.</p>
-                <button class="btn btn-primary btn-lg">Commencer Gratuitement</button>
+                <div class="profile-card reveal" style="margin-top: var(--spacing-xxxl);">
+                    <h2 class="profile-title">Changer d'Email</h2>
+                    <form id="profile-email-form" class="profile-form">
+                        <div class="form-group">
+                            <label for="profile-new-email">Nouvel Email</label>
+                            <input type="email" id="profile-new-email" placeholder="nouvel@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-email-current-password">Mot de passe actuel</label>
+                            <input type="password" id="profile-email-current-password" placeholder="Votre mot de passe actuel" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Mettre à jour l'email</button>
+                        <p id="profile-email-message" class="auth-message"></p>
+                    </form>
+                </div>
+
+                <div class="profile-card reveal" style="margin-top: var(--spacing-xxxl);">
+                    <h2 class="profile-title">Changer de Mot de Passe</h2>
+                    <form id="profile-password-form" class="profile-form">
+                        <div class="form-group">
+                            <label for="profile-password-current-password">Mot de passe actuel</label>
+                            <input type="password" id="profile-password-current-password" placeholder="Votre mot de passe actuel" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-new-password">Nouveau Mot de Passe</label>
+                            <input type="password" id="profile-new-password" placeholder="Minimum 6 caractères" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-confirm-new-password">Confirmer le Nouveau Mot de Passe</label>
+                            <input type="password" id="profile-confirm-new-password" placeholder="Confirmer le nouveau mot de passe" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Mettre à jour le mot de passe</button>
+                        <p id="profile-password-message" class="auth-message"></p>
+                    </form>
+                </div>
             </div>
         </section>
     </main>

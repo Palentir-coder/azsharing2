@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AzSharing - Fonctionnalités</title>
+    <title>Fonctionnalités - AzSharing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
-    <header class="hero-section hero-small">
+    <header id="main-header">
         <nav class="navbar">
             <div class="container">
                 <a href="/" class="logo">AzSharing</a>
@@ -20,8 +20,9 @@
                     <li><a href="/security.html">Sécurité</a></li>
                     <li><a href="/tarifs.html">Tarifs</a></li>
                     <li><a href="/about.html">À propos</a></li>
-                    <li><a href="/#testimonials">Témoignages</a></li>
+                    <li><a href="/faq.html">FAQ</a></li>
                     <li><a href="/contact.html">Contact</a></li>
+                    <li id="profile-nav-link" class="hidden"><a href="/profile.html">Mon Profil</a></li>
                 </ul>
                 <div class="nav-actions">
                     <button id="auth-button" class="btn btn-primary">Mon Compte</button>
@@ -29,49 +30,63 @@
                 </div>
             </div>
         </nav>
+    </header>
 
+    <header class="hero-section hero-small">
         <div class="hero-content container">
-            <h1>Découvrez toutes nos Fonctionnalités.</h1>
-            <p class="subtitle">Des outils puissants pour un partage de fichiers sécurisé et efficace.</p>
+            <h1>Des fonctionnalités pensées pour vous.</h1>
+            <p class="subtitle">Découvrez tout ce qu'AzSharing a à offrir pour simplifier votre partage de fichiers.</p>
         </div>
     </header>
 
     <main>
-        <section id="features" class="features-section">
+        <section class="features-section">
             <div class="container">
-                <h2 class="section-title">Des fonctionnalités pensées pour vous</h2>
-                <p class="section-subtitle">Simplifiez votre quotidien avec des outils puissants et intuitifs.</p>
+                <h2 class="section-title">Nos atouts pour un partage sans effort</h2>
+                <p class="section-subtitle">Une suite complète d'outils pour répondre à tous vos besoins.</p>
 
                 <div class="features-grid">
                     <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-                        <h3>Sécurité Renforcée</h3>
-                        <p>Chiffrement de bout en bout, contrôle d'accès granulaire et authentification multi-facteurs pour protéger vos données.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-                        <h3>Collaboration Simplifiée</h3>
-                        <p>Partagez des liens sécurisés, ajoutez des commentaires et suivez l'historique des versions en temps réel.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
-                        <h3>Accès Universel</h3>
-                        <p>Accédez à vos fichiers depuis n'importe quel appareil, n'importe où, avec une synchronisation instantanée.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open"><path d="M10 10l-2 2l2 2"/><path d="M14 10l2 2l-2 2"/></svg></div>
-                        <h3>Gestion Intuitive</h3>
-                        <p>Organisez, recherchez et gérez vos documents avec une interface utilisateur claire et facile à prendre en main.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-upload"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg></div>
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload-cloud"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg>
+                        </div>
                         <h3>Téléchargement Rapide</h3>
-                        <p>Profitez de vitesses de téléchargement optimisées pour transférer vos fichiers sans attendre.</p>
+                        <p>Uploadez et téléchargez vos fichiers à des vitesses fulgurantes, sans aucune restriction de bande passante.</p>
                     </div>
                     <div class="feature-card reveal">
-                        <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-version"><path d="M10.5 16.5L12 18l1.5-1.5"/><path d="M12 18v-5"/><path d="M12 13a4 4 0 0 0-4 4H3s.5-9 6-9 6 2 6 2V7a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v3"/><path d="M18 13a4 4 0 0 1 4 4H21s-.5-9-6-9-6 2-6 2V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"/></svg></div>
-                        <h3>Historique des Versions</h3>
-                        <p>Accédez facilement aux versions précédentes de vos fichiers et restaurez-les si nécessaire.</p>
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        <h3>Sécurité Avancée</h3>
+                        <p>Vos données sont protégées par un chiffrement de bout en bout et des protocoles de sécurité robustes.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share-2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+                        </div>
+                        <h3>Partage Facile</h3>
+                        <p>Partagez des liens sécurisés avec vos contacts ou créez des dossiers collaboratifs en quelques clics.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open"><path d="M6 14H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2.5L7 4.5 8.5 3H18a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2"/><path d="M10 10l-2 2l2 2"/><path d="M14 10l2 2l-2 2"/></svg>
+                        </div>
+                        <h3>Organisation Intuitive</h3>
+                        <p>Gérez vos fichiers et dossiers avec une interface glisser-déposer simple et efficace.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-drizzle"><path d="M4.5 14.5A2.5 2.5 0 0 1 7 12h13"/><path d="M12 17v.01"/><path d="M12 21v.01"/><path d="M16 17v.01"/><path d="M16 21v.01"/><path d="M8 17v.01"/><path d="M8 21v.01"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26a8 8 0 1 0-11.62 9"/></svg>
+                        </div>
+                        <h3>Accès Multi-plateforme</h3>
+                        <p>Accédez à vos fichiers depuis n'importe quel appareil, où que vous soyez, quand vous le souhaitez.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-infinity"><path d="M12 20c-3.3 0-6-2.7-6-6v-2c0-3.3 2.7-6 6-6s6 2.7 6 6v2c0 3.3-2.7 6-6 6zm0 0c3.3 0 6-2.7 6-6v-2c0-3.3-2.7-6-6-6s-6 2.7-6 6v2c0 3.3 2.7 6 6 6z"/></svg>
+                        </div>
+                        <h3>Stockage Illimité</h3>
+                        <p>Profitez d'un espace de stockage généreux pour tous vos documents, photos et vidéos.</p>
                     </div>
                 </div>
             </div>
@@ -81,7 +96,7 @@
             <div class="container">
                 <h2 class="section-title">Prêt à transformer votre façon de partager ?</h2>
                 <p class="section-subtitle">Rejoignez des milliers d'utilisateurs satisfaits dès aujourd'hui.</p>
-                <a href="/#auth-modal" class="btn btn-primary btn-lg">Commencer Gratuitement</a>
+                <button class="btn btn-primary btn-lg">Commencer Gratuitement</button>
             </div>
         </section>
     </main>
