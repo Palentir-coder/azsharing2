@@ -89,6 +89,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contact-form');
     const contactFormMessage = document.getElementById('contact-form-message');
 
+    // New DOM elements for Rename Item Modal
+    const renameItemModal = document.getElementById('rename-item-modal');
+    const closeRenameItemModalButton = renameItemModal ? renameItemModal.querySelector('.close-button') : null;
+    const renameItemForm = document.getElementById('rename-item-form');
+    const renameItemNameInput = document.getElementById('rename-item-name');
+    const renameItemMessage = document.getElementById('rename-item-message');
+    const renameItemTypeDisplay = document.getElementById('rename-item-type');
+
+    // New DOM elements for Move Item Modal
+    const moveItemModal = document.getElementById('move-item-modal');
+    const closeMoveItemModalButton = moveItemModal ? moveItemModal.querySelector('.close-button') : null;
+    const moveItemForm = document.getElementById('move-item-form');
+    const moveTargetFolderSelect = document.getElementById('move-target-folder');
+    const moveItemMessage = document.getElementById('move-item-message');
+    const moveItemTypeDisplay = document.getElementById('move-item-type');
+
 
     // Add console logs for debugging element selection
     console.log('Auth Modal Element:', authModal);
@@ -110,6 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Contact Form Element:', contactForm);
     console.log('Profile Email Form Element:', profileEmailForm);
     console.log('Profile Password Form Element:', profilePasswordForm);
+    console.log('Rename Item Modal Element:', renameItemModal);
+    console.log('Move Item Modal Element:', moveItemModal);
 
 
     if (!authButton) {
@@ -139,6 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (profilePasswordMessage) { profilePasswordMessage.textContent = ''; profilePasswordMessage.className = 'message'; }
         if (contactFormMessage) { contactFormMessage.textContent = ''; contactFormMessage.className = 'message'; }
         if (createFolderMessage) { createFolderMessage.textContent = ''; createFolderMessage.className = 'message'; } // Clear folder message
+        if (renameItemMessage) { renameItemMessage.textContent = ''; renameItemMessage.className = 'message'; } // Clear rename message
+        if (moveItemMessage) { moveItemMessage.textContent = ''; moveItemMessage.className = 'message'; } // Clear move message
         console.log('All messages cleared.');
     }
 
@@ -289,6 +309,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${new Date(item.created_at).toLocaleDateString('fr-FR', { year: 'numeric', month: 'short', day: 'numeric' })}</td>
                     <td>
                         <div class="file-actions">
+                            <button class="btn btn-icon rename-item-btn" data-id="${item.id}" data-name="${item.name}" data-is-folder="true" title="Renommer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="M15 5l4 4"/></svg>
+                            </button>
+                            <button class="btn btn-icon move-item-btn" data-id="${item.id}" data-name="${item.name}" data-is-folder="true" title="Déplacer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open"><path d="M6 14H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2.5L7 4.5 8.5 3H18a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2"/><path d="M10 10l-2 2l2 2"/><path d="M14 10l2 2l-2 2"/></svg>
+                            </button>
                             <button class="btn btn-icon delete-file-btn btn-danger" data-id="${item.id}" data-is-folder="true" title="Supprimer le dossier">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                             </button>
@@ -313,6 +339,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             </button>
                             <button class="btn btn-icon share-file-btn" data-id="${item.id}" title="Partager">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share-2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+                            </button>
+                            <button class="btn btn-icon rename-item-btn" data-id="${item.id}" data-name="${item.name}" data-is-folder="false" title="Renommer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="M15 5l4 4"/></svg>
+                            </button>
+                            <button class="btn btn-icon move-item-btn" data-id="${item.id}" data-name="${item.name}" data-is-folder="false" title="Déplacer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open"><path d="M6 14H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2.5L7 4.5 8.5 3H18a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2"/><path d="M10 10l-2 2l2 2"/><path d="M14 10l2 2l-2 2"/></svg>
                             </button>
                             <button class="btn btn-icon btn-danger delete-file-btn" data-id="${item.id}" data-path="${item.storage_path}" data-is-folder="false" title="Supprimer le fichier">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
@@ -459,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearMessages();
         showMessage(profileEmailMessage, 'Mise à jour de l\'e-mail...', false);
 
-        const { data: { user } } = await supabase.auth.getUser();
+        const { data: { user } = {} } = await supabase.auth.getUser(); // Destructure with default empty object
         if (!user) {
             showMessage(profileEmailMessage, 'Vous devez être connecté pour modifier votre e-mail.', true);
             return;
@@ -519,7 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearMessages();
         showMessage(profilePasswordMessage, 'Changement du mot de passe...', false);
 
-        const { data: { user } } = await supabase.auth.getUser();
+        const { data: { user } = {} } = await supabase.auth.getUser(); // Destructure with default empty object
         if (!user) {
             showMessage(profilePasswordMessage, 'Vous devez être connecté pour modifier votre mot de passe.', true);
             return;
@@ -635,7 +667,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearMessages();
         showMessage(uploadMessage, `Téléversement de "${file.name}"...`, false);
 
-        const { data: { user } } = await supabase.auth.getUser();
+        const { data: { user } = {} } = await supabase.auth.getUser(); // Destructure with default empty object
         if (!user) {
             showMessage(uploadMessage, 'Vous devez être connecté pour téléverser des fichiers.', true);
             return;
@@ -698,7 +730,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearMessages();
         showMessage(createFolderMessage, 'Création du dossier...', false);
 
-        const { data: { user } } = await supabase.auth.getUser();
+        const { data: { user } = {} } = await supabase.auth.getUser(); // Destructure with default empty object
         if (!user) {
             showMessage(createFolderMessage, 'Vous devez être connecté pour créer un dossier.', true);
             return;
@@ -740,6 +772,202 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessage(createFolderMessage, `Une erreur inattendue est survenue : ${err.message}`, true);
         }
     }
+
+    // --- Rename Item Logic ---
+    let currentRenameItemId = null;
+    let currentRenameItemIsFolder = false;
+
+    function showRenameModal(currentName, isFolder) {
+        if (renameItemModal && renameItemNameInput && renameItemTypeDisplay) {
+            renameItemNameInput.value = currentName;
+            renameItemTypeDisplay.textContent = isFolder ? 'le dossier' : 'le fichier';
+            showModal(renameItemModal);
+            renameItemNameInput.focus();
+        } else {
+            console.error('showRenameModal: One or more rename modal elements are null!');
+        }
+    }
+
+    async function handleRename(e) {
+        e.preventDefault();
+        if (!renameItemForm || !currentRenameItemId) return;
+
+        clearMessages();
+        showMessage(renameItemMessage, `Renommage du ${currentRenameItemIsFolder ? 'dossier' : 'fichier'}...`, false);
+
+        const { data: { user } = {} } = await supabase.auth.getUser(); // Destructure with default empty object
+        if (!user) {
+            showMessage(renameItemMessage, 'Vous devez être connecté pour renommer des éléments.', true);
+            return;
+        }
+
+        const newName = renameItemNameInput.value.trim();
+        if (!newName) {
+            showMessage(renameItemMessage, 'Le nouveau nom ne peut pas être vide.', true);
+            return;
+        }
+
+        try {
+            const { error } = await supabase
+                .from('files')
+                .update({ name: newName })
+                .eq('id', currentRenameItemId)
+                .eq('user_id', user.id); // Ensure user owns the item
+
+            if (error) {
+                console.error('Error renaming item:', error.message);
+                showMessage(renameItemMessage, `Erreur lors du renommage : ${error.message}`, true);
+                return;
+            }
+
+            console.log('Item renamed successfully.');
+            showMessage(renameItemMessage, `${currentRenameItemIsFolder ? 'Dossier' : 'Fichier'} renommé avec succès !`, false);
+            hideModal(renameItemModal);
+            fetchUserFiles(currentFolderId); // Refresh file list
+        } catch (err) {
+            console.error('Unexpected error during rename:', err);
+            showMessage(renameItemMessage, `Une erreur inattendue est survenue : ${err.message}`, true);
+        }
+    }
+
+    // --- Move Item Logic ---
+    let currentMoveItemId = null;
+    let currentMoveItemIsFolder = false;
+
+    async function fetchFoldersForMove(itemId, isFolder) {
+        const { data: { user } = {} } = await supabase.auth.getUser(); // Destructure with default empty object
+        if (!user) return [];
+
+        const { data: allFolders, error } = await supabase
+            .from('files')
+            .select('id, name, parent_id')
+            .eq('user_id', user.id)
+            .eq('is_folder', true)
+            .order('name', { ascending: true });
+
+        if (error) {
+            console.error('Error fetching folders for move:', error.message);
+            return [];
+        }
+
+        let excludedFolderIds = new Set();
+        excludedFolderIds.add(itemId); // Cannot move an item into itself
+
+        if (isFolder) {
+            // If moving a folder, also exclude its descendants
+            const findDescendants = (folderId) => {
+                const children = allFolders.filter(f => f.parent_id === folderId);
+                children.forEach(child => {
+                    excludedFolderIds.add(child.id);
+                    findDescendants(child.id);
+                });
+            };
+            findDescendants(itemId);
+        }
+
+        let availableFolders = [{ id: null, name: 'Racine (Mes Fichiers)' }]; // Option to move to root
+
+        allFolders.forEach(folder => {
+            // Exclude the item's current parent folder (if it's not the root)
+            // and exclude the item itself and its descendants (if it's a folder)
+            // and exclude the current folder we are viewing (as we can't move an item into the folder it's already in)
+            if (!excludedFolderIds.has(folder.id) && folder.id !== currentFolderId) {
+                availableFolders.push(folder);
+            }
+        });
+
+        return availableFolders;
+    }
+
+    async function showMoveModal(itemName, isFolder) {
+        if (moveItemModal && moveTargetFolderSelect && moveItemTypeDisplay) {
+            moveItemTypeDisplay.textContent = isFolder ? 'le dossier' : 'le fichier';
+            moveTargetFolderSelect.innerHTML = '<option value="">Chargement des dossiers...</option>';
+            showMessage(moveItemMessage, '', false); // Clear previous messages
+
+            showModal(moveItemModal);
+
+            const folders = await fetchFoldersForMove(currentMoveItemId, isFolder);
+            moveTargetFolderSelect.innerHTML = ''; // Clear loading message
+
+            if (folders.length === 0) {
+                moveTargetFolderSelect.innerHTML = '<option value="">Aucun dossier disponible</option>';
+                moveTargetFolderSelect.disabled = true;
+                showMessage(moveItemMessage, 'Aucun dossier de destination disponible.', true);
+            } else {
+                moveTargetFolderSelect.disabled = false;
+                folders.forEach(folder => {
+                    const option = document.createElement('option');
+                    option.value = folder.id || ''; // Use empty string for null (root)
+                    option.textContent = folder.name;
+                    moveTargetFolderSelect.appendChild(option);
+                });
+                // Pre-select current folder's parent if available, or root
+                const currentParentId = breadcrumbPath.length > 1 ? breadcrumbPath[breadcrumbPath.length - 2].id : null;
+                moveTargetFolderSelect.value = currentParentId || '';
+            }
+        } else {
+            console.error('showMoveModal: One or more move modal elements are null!');
+        }
+    }
+
+    async function handleMove(e) {
+        e.preventDefault();
+        if (!moveItemForm || !currentMoveItemId) return;
+
+        clearMessages();
+        showMessage(moveItemMessage, `Déplacement du ${currentMoveItemIsFolder ? 'dossier' : 'fichier'}...`, false);
+
+        const { data: { user } = {} } = await supabase.auth.getUser(); // Destructure with default empty object
+        if (!user) {
+            showMessage(moveItemMessage, 'Vous devez être connecté pour déplacer des éléments.', true);
+            return;
+        }
+
+        const targetFolderId = moveTargetFolderSelect.value === '' ? null : moveTargetFolderSelect.value;
+
+        // Get the current parent_id of the item being moved
+        const { data: currentItem, error: fetchError } = await supabase
+            .from('files')
+            .select('parent_id')
+            .eq('id', currentMoveItemId)
+            .single();
+
+        if (fetchError) {
+            console.error('Error fetching current item parent_id:', fetchError.message);
+            showMessage(moveItemMessage, `Erreur lors de la vérification de l'emplacement actuel : ${fetchError.message}`, true);
+            return;
+        }
+
+        // Check if the item is already in the target folder
+        if (currentItem && currentItem.parent_id === targetFolderId) {
+            showMessage(moveItemMessage, 'L\'élément est déjà dans ce dossier.', true);
+            return;
+        }
+
+        try {
+            const { error } = await supabase
+                .from('files')
+                .update({ parent_id: targetFolderId })
+                .eq('id', currentMoveItemId)
+                .eq('user_id', user.id); // Ensure user owns the item
+
+            if (error) {
+                console.error('Error moving item:', error.message);
+                showMessage(moveItemMessage, `Erreur lors du déplacement : ${error.message}`, true);
+                return;
+            }
+
+            console.log('Item moved successfully.');
+            showMessage(moveItemMessage, `${currentMoveItemIsFolder ? 'Dossier' : 'Fichier'} déplacé avec succès !`, false);
+            hideModal(moveItemModal);
+            fetchUserFiles(currentFolderId); // Refresh file list
+        } catch (err) {
+            console.error('Unexpected error during move:', err);
+            showMessage(moveItemMessage, `Une erreur inattendue est survenue : ${err.message}`, true);
+        }
+    }
+
 
     // --- File Actions (Download, Share, Delete) (only relevant for dashboard) ---
     async function downloadFile(filePath, fileName) {
@@ -894,6 +1122,28 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', (e) => {
                 const fileId = e.currentTarget.dataset.id;
                 alert(`Fonctionnalité de partage pour le fichier ${fileId} à implémenter.`);
+            });
+        });
+
+        // Rename buttons
+        document.querySelectorAll('.rename-item-btn').forEach(button => {
+            button.onclick = null;
+            button.addEventListener('click', (e) => {
+                currentRenameItemId = e.currentTarget.dataset.id;
+                currentRenameItemIsFolder = e.currentTarget.dataset.isFolder === 'true';
+                const currentName = e.currentTarget.dataset.name;
+                showRenameModal(currentName, currentRenameItemIsFolder);
+            });
+        });
+
+        // Move buttons
+        document.querySelectorAll('.move-item-btn').forEach(button => {
+            button.onclick = null;
+            button.addEventListener('click', async (e) => {
+                currentMoveItemId = e.currentTarget.dataset.id;
+                currentMoveItemIsFolder = e.currentTarget.dataset.isFolder === 'true';
+                const itemName = e.currentTarget.dataset.name;
+                await showMoveModal(itemName, currentMoveItemIsFolder);
             });
         });
 
@@ -1079,6 +1329,39 @@ document.addEventListener('DOMContentLoaded', () => {
     if (createFolderForm) {
         createFolderForm.addEventListener('submit', createFolder);
     }
+
+    // Rename Item Modal Event Listeners
+    if (closeRenameItemModalButton) {
+        closeRenameItemModalButton.addEventListener('click', () => {
+            hideModal(renameItemModal);
+        });
+    } else if (renameItemModal) {
+        renameItemModal.addEventListener('click', (e) => {
+            if (e.target === renameItemModal) {
+                hideModal(renameItemModal);
+            }
+        });
+    }
+    if (renameItemForm) {
+        renameItemForm.addEventListener('submit', handleRename);
+    }
+
+    // Move Item Modal Event Listeners
+    if (closeMoveItemModalButton) {
+        closeMoveItemModalButton.addEventListener('click', () => {
+            hideModal(moveItemModal);
+        });
+    } else if (moveItemModal) {
+        moveItemModal.addEventListener('click', (e) => {
+            if (e.target === moveItemModal) {
+                hideModal(moveItemModal);
+            }
+        });
+    }
+    if (moveItemForm) {
+        moveItemForm.addEventListener('submit', handleMove);
+    }
+
 
     // Profile Form Submission (only relevant for profile.html)
     if (profileForm) {

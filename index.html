@@ -283,6 +283,40 @@
         </div>
     </div>
 
+    <!-- Rename Item Modal -->
+    <div id="rename-item-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <h3>Renommer <span id="rename-item-type"></span></h3>
+            <form id="rename-item-form" class="form">
+                <div class="form-group">
+                    <label for="rename-item-name">Nouveau nom</label>
+                    <input type="text" id="rename-item-name" placeholder="Nouveau nom" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Renommer</button>
+                <p id="rename-item-message" class="message"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Move Item Modal -->
+    <div id="move-item-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <h3>Déplacer <span id="move-item-type"></span></h3>
+            <form id="move-item-form" class="form">
+                <div class="form-group">
+                    <label for="move-target-folder">Sélectionner un dossier de destination</label>
+                    <select id="move-target-folder" class="form-select" required>
+                        <option value="">Chargement des dossiers...</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Déplacer</button>
+                <p id="move-item-message" class="message"></p>
+            </form>
+        </div>
+    </div>
+
     <script type="module" src="/src/main.js"></script>
 </body>
 </html>
